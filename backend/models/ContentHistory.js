@@ -17,5 +17,5 @@ const historySchema = new mongoose.Schema({
 })   
 
 //!Compile to form model
-const ContentHistory = mongoose.model('ContentHistory',userSchema);
+const ContentHistory = mongoose.model('ContentHistory',historySchema);
 module.exports = ContentHistory;
