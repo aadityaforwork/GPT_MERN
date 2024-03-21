@@ -1,8 +1,9 @@
 const express = require('express');
 const isAuthenticated = require('../middlewares/isAuthenticated');
 const { openAIController } = require('../controllers/openAIController');
+const { checkApiRequestLimit } = require('../middlewares/checkapiRequestLimit');
 const openAIRouter = express.Router();
 
-openAIRouter.post('/generate', isAuthenticated,openAIController);
+openAIRouter.post('/generate', isAuthenticated,checkApiRequestLimit,openAIController);
 
 module.exports = openAIRouter;

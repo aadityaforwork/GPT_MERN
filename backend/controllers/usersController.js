@@ -30,8 +30,10 @@ const register = asyncHandler(
           email,
           password:hashedPassword
       });
+
       //Add the date the trial will expire
       newUser.trialExpires = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
+
       //Save the user
       await newUser.save();
       res.json
@@ -97,9 +99,8 @@ const logout=asyncHandler(async(req, res)=>{
 
 //Profile
 const userProfile=asyncHandler(async(req, res)=>{
-    console.log(req.user);
-    const id="65f9ea12f24cbe989bda9c26";
-    const user = await User.findById(id).select('-password');
+    // console.log(req.user);
+    const user = await User.findById(req?.user?.id).select('-password');
     if(user)
     {
         res.status(200).json

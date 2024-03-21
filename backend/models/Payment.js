@@ -16,7 +16,6 @@ const paymentSchema = new mongoose.Schema({
     },
     status:{
         type:String,
-        default:pending,
         required:true,
     },
     subscriptionPlan:{
@@ -27,15 +26,14 @@ const paymentSchema = new mongoose.Schema({
         type:Number,
         required:true,
     },
-    // monthlyRequestCount:{
-    //     type:Number,
-    //     required:true,
-    // },
+    monthlyRequestCount:{
+        type:Number,
+    },
 },
 {
     timestamps:true,
 })   
 
 //!Compile to form model
-const Payment = mongoose.model('Payment',userSchema);
+const Payment = mongoose.model('Payment',paymentSchema);
 module.exports = Payment;
