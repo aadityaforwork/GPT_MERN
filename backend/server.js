@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config();
+const cors= require('cors');
 const cron = require('node-cron');
 const cookieParser = require('cookie-parser');
 const usersRouter = require('./routes/usersRouter');
@@ -94,6 +95,12 @@ cron.schedule("0 0 1 * * *",async () =>{
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 
 //Routes
