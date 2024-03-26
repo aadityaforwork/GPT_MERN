@@ -33,7 +33,7 @@ const Registration = () => {
       console.log("Form values", values);
       mutation.mutate(values);
       // Simulate successful registration
-      // navigate("/login"); // Redirect user to login page
+      navigate("/login"); // Redirect user to login page
     },
   });
   console.log(mutation.isSuccess)

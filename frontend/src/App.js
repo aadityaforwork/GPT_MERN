@@ -15,9 +15,10 @@ import HistoryDetails from "./components/Users/HistoryDetails";
 import GenerateContent from "./components/ContentGeneration/GenerateContent";
 import FreePlanSignup from "./components/StripePayment/FreePlanSignup";
 import PrivateNavbar from "./components/Navbar/PrivateNavbar";
+import { useAuth } from "./AuthContext/AuthContext";
 
 const App = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = useAuth();
 
   return (
     <>

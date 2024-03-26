@@ -3,6 +3,9 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import StatusMessage from "../Alert/StatusMessage";
+import { loginAPI } from "../../apis/user/usersApi";
+import { useMutation } from "@tanstack/react-query";
+import { useAuth } from "../../AuthContext/AuthContext";
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
@@ -13,8 +16,13 @@ const validationSchema = Yup.object({
 });
 
 const Login = () => {
+  //conext hook check
+  const {isAuthenticated}=useAuth();
+  console.log(isAuthenticated);
+  //mutation
+  const mutation = useMutation({ mutationFn: loginAPI });
   const navigate = useNavigate();
-
+  
   // Formik setup for form handling
   const formik = useFormik({
     initialValues: {
@@ -25,8 +33,9 @@ const Login = () => {
     onSubmit: (values) => {
       // Here, you would typically handle form submission
       console.log(values);
+      mutation.mutate(values);
       // Simulate login success and navigate to dashboard
-      navigate("/dashboard");
+      // navigate("/dashboard");
     },
   });
 
@@ -36,6 +45,21 @@ const Login = () => {
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
           Login to Your Account
         </h2>
+        {/* displayLoading */}
+        {mutation.isPending && (
+          <StatusMessage type="loading" message="Loading..." />
+        )}
+        {/* displayError */}
+        {mutation.isError && (
+          <StatusMessage
+            type="error"
+            message={mutation?.error?.response?.data?.message}
+          />
+        )}
+        {/* displaySuccess */}
+        {mutation.isSuccess && (
+          <StatusMessage type="success" message="Success" />
+        )}
 
         {/* Form for login */}
         <form onSubmit={formik.handleSubmit} className="space-y-6">

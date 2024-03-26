@@ -5,6 +5,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { AuthProvider } from "./AuthContext/AuthContext";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 //React Query Client
@@ -13,7 +15,9 @@ root.render(
   
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
+    <AuthProvider>
     <App />
+    </AuthProvider>
     <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </React.StrictMode>

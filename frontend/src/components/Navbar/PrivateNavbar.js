@@ -5,6 +5,8 @@ import { PlusIcon } from "@heroicons/react/20/solid";
 import { FiLogOut } from "react-icons/fi";
 import { FaCreativeCommonsShare } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
+import { logoutAPI } from "../../apis/user/usersApi";
+import { useMutation } from "@tanstack/react-query";
 
 const user = {
   name: "Tom Cook",
@@ -21,8 +23,12 @@ function classNames(...classes) {
 }
 
 export default function PrivateNavbar() {
+  //mutation
+  const mutation = useMutation({ mutationFn: logoutAPI });
   //handle logout
-  const handleLogout = () => {};
+  const handleLogout = () => {
+  mutation.mutate();
+  };
 
   return (
     <Disclosure as="nav" className="bg-gray-900">
@@ -76,7 +82,7 @@ export default function PrivateNavbar() {
                     <PlusIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
                     Generate content
                   </Link>
-
+                  {/* Logout */}
                   <button
                     onClick={handleLogout}
                     type="button"
