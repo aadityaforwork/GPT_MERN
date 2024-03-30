@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import {useMutation} from "@tanstack/react-query";
 import StatusMessage from "../Alert/StatusMessage";
 import { registerAPI } from "../../apis/user/usersApi";
+import { useAuth } from "../../AuthContext/AuthContext";
 
 // Validation schema
 const validationSchema = Yup.object({
@@ -16,6 +17,7 @@ const validationSchema = Yup.object({
 });
 
 const Registration = () => {
+  const { isAuthenticated, login } = useAuth();
   const navigate = useNavigate();
   //mutation
   const mutation = useMutation({mutationFn:registerAPI})
@@ -36,6 +38,15 @@ const Registration = () => {
       navigate("/login"); // Redirect user to login page
     },
   });
+
+  useEffect(() => {
+    if (mutation.isSuccess) {
+      console.log("mutation.isSuccess:", mutation.isSuccess);
+      login();
+      navigate("/dashboard");
+    }
+  }, [mutation.isSuccess]);
+
   console.log(mutation.isSuccess)
   console.log(mutation.isError)
   console.log(mutation.isLoading)

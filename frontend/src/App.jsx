@@ -16,13 +16,16 @@ import GenerateContent from "./components/ContentGeneration/GenerateContent";
 import FreePlanSignup from "./components/StripePayment/FreePlanSignup";
 import PrivateNavbar from "./components/Navbar/PrivateNavbar";
 import { useAuth } from "./AuthContext/AuthContext";
+import AuthRoute from "./components/AuthRoute/AuthRoute";
 
 const App = () => {
-  const isAuthenticated = useAuth();
+  const {isAuthenticated} = useAuth();
+  console.log(isAuthenticated);
 
   return (
     <>
       <BrowserRouter>
+      
         {isAuthenticated ? <PrivateNavbar /> : <PublicNavbar />}
         <Routes>
           <Route path="/features" element={<AppFeatures />} />
@@ -43,7 +46,11 @@ const App = () => {
 
           <Route path="/success" element={<PaymentSuccess />} />
 
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={
+          <AuthRoute>
+            <Dashboard />
+          </AuthRoute>
+          }/>
 
           <Route path="/history" element={<ContentGenerationHistory />} />
 

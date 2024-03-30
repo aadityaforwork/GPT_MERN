@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,12 +17,13 @@ const validationSchema = Yup.object({
 
 const Login = () => {
   //conext hook check
-  const {isAuthenticated}=useAuth();
-  console.log(isAuthenticated);
-  //mutation
-  const mutation = useMutation({ mutationFn: loginAPI });
+  const { isAuthenticated, login } = useAuth();
+  // console.log(isAuthenticated);
   const navigate = useNavigate();
   
+  //mutation
+  const mutation = useMutation({ mutationFn: loginAPI });
+
   // Formik setup for form handling
   const formik = useFormik({
     initialValues: {
@@ -31,13 +32,23 @@ const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      // Here, you would typically handle form submission
-      console.log(values);
+      //  handle form submission
+
       mutation.mutate(values);
-      // Simulate login success and navigate to dashboard
+      // login success and navigate to dashboard
       // navigate("/dashboard");
     },
   });
+
+  useEffect(() => {
+    if (mutation.isSuccess) {
+      console.log("mutation.isSuccess:", mutation.isSuccess);
+      login();
+      navigate("/dashboard");
+    }
+  }, [mutation.isSuccess]);
+
+  
 
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center">
@@ -45,23 +56,23 @@ const Login = () => {
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
           Login to Your Account
         </h2>
-        {/* displayLoading */}
+        {/* Loading */}
         {mutation.isPending && (
           <StatusMessage type="loading" message="Loading..." />
         )}
-        {/* displayError */}
+        {/* Error */}
         {mutation.isError && (
           <StatusMessage
             type="error"
             message={mutation?.error?.response?.data?.message}
           />
         )}
-        {/* displaySuccess */}
+        {/*Success */}
         {mutation.isSuccess && (
           <StatusMessage type="success" message="Success" />
         )}
 
-        {/* Form for login */}
+        {/*login form */}
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           {/* Email input field */}
           <div>
