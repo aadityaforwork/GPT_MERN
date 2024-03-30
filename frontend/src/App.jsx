@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CheckoutForm from "./components/StripePayment/CheckoutForm";
 import PaymentSuccess from "./components/StripePayment/PaymentSuccess";
@@ -56,7 +56,11 @@ const App = () => {
 
           <Route path="/history/:id" element={<HistoryDetails />} />
           
-          <Route path="/generate-content" element={<GenerateContent />} />
+          <Route path="/generate-content" element={
+          <AuthRoute>
+          <GenerateContent />
+          </AuthRoute>
+          } />
         </Routes>
       </BrowserRouter>
     </>

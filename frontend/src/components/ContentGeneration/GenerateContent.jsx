@@ -2,10 +2,26 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { getUserProfileAPI } from "../../apis/user/usersApi";
+import StatusMessage from "../Alert/StatusMessage";
+import { generateContentAPI } from "../../apis/chatgpt/chatGPT";
 
 const BlogPostAIAssistant = () => {
   const [generatedContent, setGeneratedContent] = useState("");
 
+
+     //get the user profile
+     const { isError, isLoading, data, error } = useQuery({
+      queryFn: getUserProfileAPI,
+      queryKey: ["profile"],
+    });
+    
+    //mutation
+     const mutation = useMutation({ mutationFn:generateContentAPI });
+    // console.log({data,isError,isLoading,error});
+     console.log(mutation);
+     
   // Formik setup for handling form data
   const formik = useFormik({
     initialValues: {
@@ -21,9 +37,27 @@ const BlogPostAIAssistant = () => {
     onSubmit: (values) => {
       // Simulate content generation based on form values
       console.log(values);
-      setGeneratedContent(`Generated content for prompt: ${values.prompt}`);
+      mutation.mutateAsync(`Generate a blog post for ${values.prompt} with tone ${values.tone} and category ${values.category}`);
+      // console.log(mutation?.error);
+      setGeneratedContent(mutation?.data);
+      console.log(mutation?.data);
+
     },
   });
+
+
+
+  //display loading message
+  if (isLoading) {
+    return <StatusMessage type="loading" message="Loadin please wait.." />;
+  }
+
+  //display error
+  if(isError)
+  {
+    return <StatusMessage type="error" message={error?.response?.data?.message} />;
+  }
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-900 flex justify-center items-center p-6">
@@ -31,9 +65,25 @@ const BlogPostAIAssistant = () => {
         <h2 className="text-3xl font-extrabold text-gray-800 mb-6 text-center">
           AI Blog Post Generator
         </h2>
-
+        {/* Loading */}
+         {mutation?.isPending && <StatusMessage type="loading" message="Generating content please wait.." />}
+        {/* Error */}
+        {mutation?.isError && <StatusMessage type="error" message={mutation?.error?.response?.data?.message}/>}
+        {/* Success */}
+        {mutation?.isSuccess && <StatusMessage type="success" message="Content generated successfully"/>}
         {/* Static display for Plan and Credits */}
-        {/* ... */}
+          <div className="flex">
+
+            <div className="my-2 mr-2">
+            <span className=" text-sm font-semibold bg-green-200 px-3 py-1 rounded-full">Plan: {data?.user?.subscriptionPlan}</span>
+            </div>
+        
+
+            <div className="my-2 mx-2">
+            <span className=" text-sm font-semibold bg-green-200 px-3 py-1 rounded-full">Credit: {data?.user?.apiRequestCount} / {data?.user?.monthlyRequestCount}</span>
+            </div>
+
+            </div>
 
         {/* Form for generating content */}
         <form onSubmit={formik.handleSubmit} className="space-y-4">
@@ -111,16 +161,16 @@ const BlogPostAIAssistant = () => {
             Generate Content
           </button>
           {/* Link to view history */}
-          <Link to="/history">View history</Link>
+          <div className=" text-blue-500 pt-1 px-2"> <Link to="/history">View history</Link></div>
         </form>
 
         {/* Display generated content */}
-        {generatedContent && (
+        {(
           <div className="mt-6 p-4 bg-gray-100 rounded-md">
             <h3 className="text-lg font-semibold text-gray-800 mb-2">
               Generated Content:
             </h3>
-            <p className="text-gray-600">{generatedContent}</p>
+            <p className="text-gray-600">{mutation?.data}</p>
           </div>
         )}
       </div>

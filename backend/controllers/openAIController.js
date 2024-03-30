@@ -27,7 +27,7 @@ const openAIController = asyncHandler(async (req, res) => {
        });
        //*Push the content into history of the user
        const userFound = await User.findById(req?.user?._id);
-       userFound.history.push(newContent?._id);
+       userFound.contentHistory.push(newContent?._id);
        //*updating the api request count
        userFound.apiRequestCount+=1;
         await userFound.save();
