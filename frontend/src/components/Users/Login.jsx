@@ -46,7 +46,7 @@ const Login = () => {
       login();
       navigate("/dashboard");
     }
-  }, [mutation.isSuccess]);
+  }, [mutation.isSuccess,login,navigate]);
 
   
 
