@@ -13,7 +13,7 @@ const handleStripePayment = asyncHandler(async (req, res) => {
         //Create Payment 
         const paymentIntent = await stripe.paymentIntents.create({
             amount : Number(amount)*100,
-            currency:'usd',
+            currency:'usd', 
             metadata:{
                 userId:user?._id?.toString(),
                 userEmail:user?.email,
@@ -39,7 +39,7 @@ const verifyPayment = asyncHandler(async (req, res) => {
     try {
         const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
         console.log(paymentIntent);
-        if(paymentIntent?.status!=="succeeded")
+        if(paymentIntent?.status==="succeeded")
         {
            //get the info metadata
            const metadata = paymentIntent?.metadata;

@@ -52,7 +52,11 @@ const App = () => {
           </AuthRoute>
           }/>
 
-          <Route path="/history" element={<ContentGenerationHistory />} />
+          <Route path="/history" element={
+          <AuthRoute>
+          <ContentGenerationHistory />
+          </AuthRoute>
+          } />
 
           <Route path="/history/:id" element={<HistoryDetails />} />
           

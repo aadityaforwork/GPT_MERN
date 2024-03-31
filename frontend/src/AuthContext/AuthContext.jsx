@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  console.log(isAuthenticated);
+  // console.log(isAuthenticated);
   
   //?Request using useQuery
   const { isError, isLoading, data, isSuccess } = useQuery({
@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
   //?Updating the user auth after logout
   const logout = () => {
     setIsAuthenticated(false);
-    console.log(isAuthenticated);
+    // console.log(isAuthenticated);
   };
   return (
     <AuthContext.Provider

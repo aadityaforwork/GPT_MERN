@@ -2,7 +2,7 @@ import axios from 'axios';
 
 //? Registration
 export const registerAPI = async (userData) => {
-  const reposnse=await axios.post('http://localhost:5000/api/v1/users/register',
+  const response=await axios.post('http://localhost:5000/api/v1/users/register',
   {
     email:userData?.email,
     password:userData?.password,
@@ -12,12 +12,12 @@ export const registerAPI = async (userData) => {
     withCredentials:true
   }
   );
-  return reposnse?.data;
+  return response?.data;
 };
 
 //? Login
 export const loginAPI = async (userData) => {
-  const reposnse=await axios.post('http://localhost:5000/api/v1/users/login',
+  const response=await axios.post('http://localhost:5000/api/v1/users/login',
   {
     email:userData?.email,
     password:userData?.password,
@@ -26,38 +26,38 @@ export const loginAPI = async (userData) => {
     withCredentials:true
   }
   );
-  return reposnse?.data;
+  return response?.data;
 };
 
 
 //? Cheking Authentication
 export const checkUserAuthStatusAPI = async (userData) => {
-  const reposnse=await axios.get('http://localhost:5000/api/v1/users/auth-check',
+  const response=await axios.get('http://localhost:5000/api/v1/users/auth-check',
   {
     withCredentials:true
   }
   );
-  return reposnse?.data;
+  return response?.data;
 };
 
 
 //? Logout
 export const logoutAPI = async (userData) => {
-  const reposnse=await axios.post('http://localhost:5000/api/v1/users/logout',
+  const response=await axios.post('http://localhost:5000/api/v1/users/logout',
   {},
   {
     withCredentials:true
   }
   );
-  return reposnse?.data;
+  return response?.data;
 };
 
 //? Profile
 export const getUserProfileAPI = async (userData) => {
-  const reposnse=await axios.get('http://localhost:5000/api/v1/users/profile',
+  const response=await axios.get('http://localhost:5000/api/v1/users/profile',
   {
     withCredentials:true
   }
   );
-  return reposnse?.data;
+  return response?.data;
 };

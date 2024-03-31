@@ -10,8 +10,6 @@ import { useMutation } from "@tanstack/react-query";
 import { useAuth } from "../../AuthContext/AuthContext";
 
 const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
 };
 const navigation = [
   { name: "Dashboard", href: "/dashboard", current: true },

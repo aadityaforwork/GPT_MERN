@@ -20,7 +20,7 @@ const BlogPostAIAssistant = () => {
     //mutation
      const mutation = useMutation({ mutationFn:generateContentAPI });
     // console.log({data,isError,isLoading,error});
-     console.log(mutation);
+    //  console.log(mutation);
      
   // Formik setup for handling form data
   const formik = useFormik({
@@ -40,7 +40,7 @@ const BlogPostAIAssistant = () => {
       mutation.mutateAsync(`Generate a blog post for ${values.prompt} with tone ${values.tone} and category ${values.category}`);
       // console.log(mutation?.error);
       setGeneratedContent(mutation?.data);
-      console.log(mutation?.data);
+      // console.log(mutation?.data);
 
     },
   });

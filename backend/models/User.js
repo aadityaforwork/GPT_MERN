@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
     },
     monthlyRequestCount:{
         type:Number,
-        default:100,//100 credits for the user which needs to use within 3 days
+        default:10,//100 credits for the user which needs to use within 3 days
     },
     nextBillingDate:Date,
     payments:[

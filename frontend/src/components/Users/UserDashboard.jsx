@@ -75,9 +75,9 @@ const Dashboard = () => {
               </p>
               <p className="mb-4">
                 Next Billing Date:{" "}
-                <span className=" px-1 font-bold text-red-500">
+                <span className=" px-1 font-bold">
                   {data?.user?.trialExpires
-                    ? new Date(data?.user?.nextBillingDate).toLocaleDateString()
+                    ? new Date(data?.user?.nextBillingDate).toDateString()
                     : "No billing date"}
                 </span>
               </p>
@@ -113,7 +113,7 @@ const Dashboard = () => {
                 )}
               </p>
               <p className="mb-4">
-                Expires on: {new Date(data?.user?.trialExpires).toDateString()}
+                Expires on: <span className=" font-bold">{new Date(data?.user?.trialExpires).toDateString()}</span>
               </p>
               <Link
                 to="/plans"

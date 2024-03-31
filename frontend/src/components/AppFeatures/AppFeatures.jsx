@@ -6,25 +6,25 @@ import {
 
 const features = [
   {
-    name: "Push to deploy",
+    name: "AI Content Generation",
     description:
-      "lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit elit congue ante nec amet. Dolor aenean curabitur viverra suspendisse iaculis eget. Nec mollis placerat ultricies euismod ut condimentum.",
+      "Generate high-quality, AI-powered content effortlessly. Our advanced algorithms create engaging articles, blog posts, and more in minutes, saving you time and effort.",
+    href: "#",
+    icon: ArrowPathIcon,
+  },
+  {
+    name: "Data Security",
+    description:
+      "Ensure the security and privacy of your data with advanced encryption and protection measures. Our platform follows industry-leading security standards to keep your content safe.",
     href: "#",
     icon: CloudArrowUpIcon,
   },
   {
-    name: "SSL certificates",
+    name: "Fast Processing",
     description:
-      "lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit elit congue ante nec amet. Dolor aenean curabitur viverra suspendisse iaculis eget. Nec mollis placerat ultricies euismod ut condimentum.",
+      "Experience lightning-fast content generation with our optimized infrastructure. Our system processes requests quickly, delivering results in seconds for increased productivity.",
     href: "#",
     icon: LockClosedIcon,
-  },
-  {
-    name: "Simple queues",
-    description:
-      "lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit elit congue ante nec amet. Dolor aenean curabitur viverra suspendisse iaculis eget. Nec mollis placerat ultricies euismod ut condimentum.",
-    href: "#",
-    icon: ArrowPathIcon,
   },
 ];
 
@@ -34,15 +34,13 @@ export default function AppFeatures() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-indigo-400">
-            Deploy faster
+            Generate content effortlessly
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Everything you need to deploy your app
+            Unlock the power of AI content generation
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-300">
-            Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
-            Suspendisse eget egestas a elementum pulvinar et feugiat blandit at.
-            In mi viverra elit nunc.
+            Accelerate your content creation process with our innovative features designed to revolutionize how you generate content.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">

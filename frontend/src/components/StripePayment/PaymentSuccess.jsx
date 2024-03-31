@@ -1,12 +1,21 @@
 import React from "react";
+import { useParams, useSearchParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { FaCheckCircle, FaTimesCircle, FaSpinner } from "react-icons/fa";
-
+import { useQuery } from "@tanstack/react-query";
+import { verifyPaymentIntentAPI } from "../../apis/stripePayment/stripePayment";
 const PaymentSuccess = () => {
-  // Static values for demonstration
-  const isLoading = false; // Change to true to simulate loading state
-  const isError = false; // Change to true to simulate error state
-  const paymentIntentID = "example_payment_intent_id"; // Example payment intent ID
+
+   // Get the payloads
+   const [searchParams] = useSearchParams();
+   const paymentIntentId = searchParams.get("payment_intent");
+   const { data, isLoading, isError,isSuccess,isPending } = useQuery({
+    queryFn: () => verifyPaymentIntentAPI(paymentIntentId ),
+    queryKey:["verifying payment"]
+   })
+    
+  //  console.log(data);
+  
 
   return (
     <div className="max-w-lg mx-auto my-10 p-6 bg-white shadow-md rounded-lg">
@@ -31,7 +40,7 @@ const PaymentSuccess = () => {
           <FaCheckCircle className="text-5xl mb-3" />
           <h1 className="text-2xl font-bold mb-3">Payment Successful</h1>
           <p className="text-gray-600 mb-4">
-            Thank you for your payment. Your transaction ID is {paymentIntentID}
+            Thank you for your payment. Your transaction ID is {paymentIntentId}
             .
           </p>
           <Link
