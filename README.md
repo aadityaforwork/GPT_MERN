@@ -32,7 +32,9 @@ Welcome to the AI Content Generator repository! This project is a web applicatio
 ![Screenshot 2024-03-31 160047](https://github.com/aadityaforwork/GPT_MERN/assets/129250086/25fa53b7-80ed-4299-964b-262f6d763d74)
 
 
+### Repository View Counter - HITS
 
+![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https://github.com/aadityaforwork/GPT_MERN)
 
 
 
