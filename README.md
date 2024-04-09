@@ -41,6 +41,7 @@ Welcome to the AI Content Generator repository! This project is a web applicatio
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/ai-content-generator.git
+   git clone https://github.com/aadityaforwork/GPT_MERN
+   
 
 
